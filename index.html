@@ -1,105 +1,79 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Для тебя</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
       font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
-      overflow: hidden;
-    }
-    #container {
-      max-width: 600px;
       text-align: center;
-      font-size: 1.8em;
-      line-height: 1.6;
+    }
+    #text {
+      max-width: 800px;
       padding: 20px;
     }
-    .hidden {
+    #question {
       display: none;
-    }
-    #final-buttons {
+      font-size: 2rem;
       margin-top: 30px;
     }
-    .btn {
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 1em;
-      background-color: white;
-      color: black;
+    button {
+      background-color: #fff;
+      color: #000;
       border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
       cursor: pointer;
-      border-radius: 10px;
-      transition: background 0.3s;
-    }
-    .btn:hover {
-      background-color: #ddd;
+      margin: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="container"></div><audio id="bg-music" src="your-music.mp3" autoplay loop></audio>
+  <div id="text"></div>
+  <div id="question">
+    Ты станешь моей девушкой?<br />
+    <button onclick="alert('Ты сделала меня самым счастливым человеком!')">Да</button>
+    <button onclick="alert('Я всё равно буду ждать :)')">Нет</button>
+  </div>
+  <audio id="bg-music" src="bg.mp3" autoplay loop></audio>
 
   <script>
-    const container = document.getElementById('container');
-    const texts = [
-      "С тобой даже самый обычный день кажется особенным.",
-      "Ты умеешь молчать так, что в этой тишине становится по-настоящему спокойно — уютно.",
-      "Рядом с тобой мне не нужно притворяться, я могу быть собой. И это, пожалуй, самое ценное.",
-      "Иногда я ловлю себя на мысли, что хочу остановить время — просто побыть рядом, хоть немного.",
-      "В мире, где всё меняется каждую секунду, ты — редкое ощущение покоя.",
-      "Я люблю тебя. Искренне, глубоко, без громких слов и драм.",
-      "И я бесконечно дорожу тем, что ты появилась в моей жизни. Это одно из самых счастливых совпадений, за которые я благодарен судьбе каждый день.",
-      "Ты станешь моей девушкой?"
-    ];
+    const text = `С тобой даже самый обычный день кажется особенным.
+Ты умеешь молчать так, что в этой тишине становится по-настоящему спокойно — уютно.
+Рядом с тобой мне не нужно притворяться, я могу быть собой. И это, пожалуй, самое ценное.
+Иногда я ловлю себя на мысли, что хочу остановить время — просто побыть рядом, хоть немного.
+В мире, где всё меняется каждую секунду, ты — редкое ощущение покоя.
+Я люблю тебя. Искренне, глубоко, без громких слов и драм.
+И я бесконечно дорожу тем, что ты появилась в моей жизни.
+Это одно из самых счастливых совпадений, за которые я благодарен судьбе каждый день.`.split('\n');
 
-    let index = 0;
+    const textDiv = document.getElementById('text');
+    const questionDiv = document.getElementById('question');
 
-    function showNextText() {
-      if (index < texts.length - 1) {
+    let i = 0;
+    function showLine() {
+      if (i < text.length) {
         const p = document.createElement('p');
-        p.textContent = texts[index];
-        container.appendChild(p);
-        index++;
-        setTimeout(showNextText, 3000);
+        p.textContent = text[i];
+        textDiv.appendChild(p);
+        i++;
+        setTimeout(showLine, 2500);
       } else {
-        const finalP = document.createElement('p');
-        finalP.textContent = texts[index];
-        container.appendChild(finalP);
-        showButtons();
+        questionDiv.style.display = 'block';
       }
     }
-
-    function showButtons() {
-      const btnContainer = document.createElement('div');
-      btnContainer.id = 'final-buttons';
-
-      const btnYes = document.createElement('button');
-      btnYes.textContent = 'Да';
-      btnYes.className = 'btn';
-      btnYes.onclick = () => alert('Теперь ты моя!');
-
-      const btnOfCourse = document.createElement('button');
-      btnOfCourse.textContent = 'Конечно!';
-      btnOfCourse.className = 'btn';
-      btnOfCourse.onclick = () => alert('Я самый счастливый человек!');
-
-      btnContainer.appendChild(btnYes);
-      btnContainer.appendChild(btnOfCourse);
-      container.appendChild(btnContainer);
-    }
-
-    window.onload = () => {
-      setTimeout(showNextText, 1000);
-    };
-  </script></body>
+    showLine();
+  </script>
+</body>
 </html>
