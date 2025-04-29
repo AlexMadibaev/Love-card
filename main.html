@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для тебя</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Great Vibes', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #container {
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.8em;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+    #final-buttons {
+      margin-top: 30px;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      background-color: white;
+      color: black;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div><audio id="bg-music" src="your-music.mp3" autoplay loop></audio>
+
+  <script>
+    const container = document.getElementById('container');
+    const texts = [
+      "С тобой даже самый обычный день кажется особенным.",
+      "Ты умеешь молчать так, что в этой тишине становится по-настоящему спокойно — уютно.",
+      "Рядом с тобой мне не нужно притворяться, я могу быть собой. И это, пожалуй, самое ценное.",
+      "Иногда я ловлю себя на мысли, что хочу остановить время — просто побыть рядом, хоть немного.",
+      "В мире, где всё меняется каждую секунду, ты — редкое ощущение покоя.",
+      "Я люблю тебя. Искренне, глубоко, без громких слов и драм.",
+      "И я бесконечно дорожу тем, что ты появилась в моей жизни. Это одно из самых счастливых совпадений, за которые я благодарен судьбе каждый день.",
+      "Ты станешь моей девушкой?"
+    ];
+
+    let index = 0;
+
+    function showNextText() {
+      if (index < texts.length - 1) {
+        const p = document.createElement('p');
+        p.textContent = texts[index];
+        container.appendChild(p);
+        index++;
+        setTimeout(showNextText, 3000);
+      } else {
+        const finalP = document.createElement('p');
+        finalP.textContent = texts[index];
+        container.appendChild(finalP);
+        showButtons();
+      }
+    }
+
+    function showButtons() {
+      const btnContainer = document.createElement('div');
+      btnContainer.id = 'final-buttons';
+
+      const btnYes = document.createElement('button');
+      btnYes.textContent = 'Да';
+      btnYes.className = 'btn';
+      btnYes.onclick = () => alert('Теперь ты моя!');
+
+      const btnOfCourse = document.createElement('button');
+      btnOfCourse.textContent = 'Конечно!';
+      btnOfCourse.className = 'btn';
+      btnOfCourse.onclick = () => alert('Я самый счастливый человек!');
+
+      btnContainer.appendChild(btnYes);
+      btnContainer.appendChild(btnOfCourse);
+      container.appendChild(btnContainer);
+    }
+
+    window.onload = () => {
+      setTimeout(showNextText, 1000);
+    };
+  </script></body>
+</html>
